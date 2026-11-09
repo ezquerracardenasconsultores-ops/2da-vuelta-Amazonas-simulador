@@ -1,1 +1,1412 @@
 
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Resultados históricos y escenarios aritméticos de la segunda elección regional de Amazonas 2026.">
+<title>Amazonas 2026 | Observatorio electoral</title>
+<style>
+:root{
+  --bg:#f2f6f8;
+  --paper:#fff;
+  --navy:#102e3e;
+  --teal:#087e77;
+  --orange:#bc7656;
+  --ink:#162f40;
+  --gray:#607789;
+  --edge:#dbe5eb;
+  --blue:#4c80a0;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:var(--bg);
+  color:var(--ink);
+  font:15px/1.5 system-ui,-apple-system,Segoe UI,sans-serif;
+}
+button,input{font:inherit}
+button{cursor:pointer}
+a{color:#087e77}
+a:focus-visible,button:focus-visible,input:focus-visible{
+  outline:3px solid #66b6ad;
+  outline-offset:2px;
+}
+.container{
+  width:min(1160px,calc(100% - 28px));
+  margin:auto;
+}
+.hero{
+  padding:36px 0 39px;
+  background:linear-gradient(120deg,#0d2c3e,#145963);
+  color:white;
+}
+.eyebrow{
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  font-weight:800;
+  color:#9be4da;
+}
+.hero h1{
+  font-size:clamp(30px,4.8vw,49px);
+  line-height:1.12;
+  margin:10px 0 13px;
+  letter-spacing:-.03em;
+}
+.hero p{
+  max-width:850px;
+  color:#d4e9e9;
+  margin:0;
+}
+.tags{
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:19px;
+}
+.tag{
+  border:1px solid #6e9c9e;
+  border-radius:18px;
+  padding:5px 10px;
+  font-size:11px;
+}
+nav{
+  position:sticky;
+  top:0;
+  background:white;
+  z-index:3;
+  border-bottom:1px solid var(--edge);
+}
+nav .container{
+  display:flex;
+  overflow:auto;
+  gap:5px;
+}
+.navbtn{
+  white-space:nowrap;
+  background:transparent;
+  border:0;
+  border-bottom:3px solid transparent;
+  color:var(--gray);
+  padding:16px 17px;
+  font-weight:750;
+}
+.navbtn.active{
+  border-bottom-color:var(--teal);
+  color:var(--teal);
+}
+main{padding:24px 0 48px}
+.page{display:none}
+.page.active{display:block}
+.grid{display:grid;gap:15px}
+.four{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.two{
+  grid-template-columns:repeat(2,minmax(0,1fr));
+}
+.card{
+  background:var(--paper);
+  border:1px solid var(--edge);
+  border-radius:16px;
+  padding:21px;
+  box-shadow:0 5px 20px #102e3e09;
+}
+.mt{margin-top:15px}
+.kpi small{
+  color:var(--gray);
+  font-weight:650;
+}
+.kpi strong{
+  display:block;
+  font-size:clamp(22px,3vw,33px);
+  font-variant-numeric:tabular-nums;
+  letter-spacing:-.035em;
+  margin:6px 0;
+}
+.kpi em{
+  font-size:11px;
+  font-style:normal;
+  color:var(--gray);
+}
+h2{font-size:20px;margin:0 0 10px}
+h3{margin:0 0 10px;font-size:16px}
+.muted{font-size:13px;color:var(--gray)}
+.bar{margin:15px 0}
+.barline{
+  display:flex;
+  justify-content:space-between;
+  gap:10px;
+  font-size:13px;
+}
+.barline strong{
+  white-space:nowrap;
+  font-variant-numeric:tabular-nums;
+}
+.track{
+  height:13px;
+  background:#e9eff3;
+  overflow:hidden;
+  border-radius:10px;
+  margin-top:6px;
+}
+.fill{
+  height:100%;
+  border-radius:10px;
+  transition:width .2s;
+}
+.note{
+  padding:14px;
+  border-radius:11px;
+  background:#eaf6f3;
+  color:#286460;
+  font-size:13px;
+}
+.warning{
+  padding:14px;
+  border-radius:11px;
+  background:#fff7e8;
+  border:1px solid #edddb8;
+  color:#715b32;
+  font-size:13px;
+}
+.control{margin:17px 0}
+.control label{
+  display:flex;
+  justify-content:space-between;
+  gap:12px;
+  align-items:center;
+  font-weight:700;
+}
+.control output{
+  font-weight:800;
+  color:var(--teal);
+  font-variant-numeric:tabular-nums;
+}
+.control input[type=range]{
+  display:block;
+  width:100%;
+  margin:11px 0;
+  accent-color:var(--teal);
+}
+.ends{
+  display:flex;
+  justify-content:space-between;
+  color:var(--gray);
+  font-size:11px;
+}
+.numberinput{
+  width:100%;
+  border:1px solid #cad7df;
+  border-radius:9px;
+  padding:10px;
+  margin:5px 0 2px;
+  background:white;
+  color:var(--ink);
+}
+.mini{font-size:12px;color:var(--gray)}
+.tablebox{overflow-x:auto}
+table{
+  width:100%;
+  border-collapse:collapse;
+  min-width:570px;
+  font-size:13px;
+}
+th,td{
+  padding:11px 10px;
+  border-bottom:1px solid #e5edf1;
+  text-align:left;
+}
+th{
+  background:#eef4f7;
+  color:#4c6574;
+}
+.right{
+  text-align:right;
+  font-variant-numeric:tabular-nums;
+}
+.centerrow{
+  background:#eef8f4;
+  font-weight:750;
+}
+.btn{
+  background:white;
+  border:1px solid #b9d0d1;
+  border-radius:10px;
+  padding:10px 14px;
+  color:#126c65;
+  font-weight:750;
+}
+.btn:hover{background:#eaf5f3}
+.buttons{
+  display:flex;
+  flex-wrap:wrap;
+  gap:9px;
+}
+.summary{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:12px;
+}
+.summary>div{
+  padding:15px;
+  border-radius:11px;
+  background:#f0f6f8;
+}
+.summary span{
+  display:block;
+  color:var(--gray);
+  font-size:12px;
+}
+.summary strong{
+  font-size:22px;
+  font-variant-numeric:tabular-nums;
+}
+.source{
+  padding:15px;
+  border-bottom:1px solid var(--edge);
+}
+.source:last-child{border-bottom:0}
+.source strong{display:block}
+.source p{
+  font-size:12px;
+  color:var(--gray);
+  margin:3px 0 9px;
+}
+.status{
+  font-size:12px;
+  font-weight:800;
+  color:var(--gray);
+}
+footer{
+  border-top:1px solid var(--edge);
+  padding:22px 0;
+  color:var(--gray);
+  font-size:12px;
+}
+@media(max-width:850px){
+  .four{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+  .two{grid-template-columns:1fr}
+}
+@media(max-width:510px){
+  .container{width:calc(100% - 22px)}
+  .card{padding:16px}
+  .summary{grid-template-columns:1fr}
+  .navbtn{padding:13px 11px}
+  .barline{font-size:12px}
+}
+@media print{
+  nav,.buttons,.control{display:none!important}
+  .page{display:block!important;break-before:page}
+  .card{box-shadow:none}
+  .hero{background:white;color:#102e3e}
+  .hero p,.eyebrow{color:#102e3e}
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+  <div class="container">
+    <div class="eyebrow">
+      Estadística electoral · Amazonas, Perú
+    </div>
+    <h1>
+      Resultados históricos y escenarios de segunda vuelta
+    </h1>
+    <p>
+      Conservación hipotética de los votos de los dos finalistas,
+      caída histórica de asistencia, votos blancos y nulos,
+      reparto 45/50/55 y comparación de cambios directos
+      entre candidaturas.
+    </p>
+    <div class="tags">
+      <span class="tag">Primera vuelta: 4 oct 2026</span>
+      <span class="tag">Antecedente: 2022</span>
+      <span class="tag">Escenarios, no pronósticos</span>
+    </div>
+  </div>
+</header>
+
+<nav aria-label="Secciones">
+  <div class="container">
+    <button class="navbtn active" data-page="historia">
+      01 · Datos reales
+    </button>
+    <button class="navbtn" data-page="reparto">
+      02 · Reparto en tres escenarios
+    </button>
+    <button class="navbtn" data-page="transferencia">
+      03 · Utcubamba
+    </button>
+    <button class="navbtn" data-page="sensibilidad">
+      04 · Sensibilidad
+    </button>
+    <button class="navbtn" data-page="fuentes">
+      05 · Fuentes
+    </button>
+  </div>
+</nav>
+
+<main class="container">
+
+<section class="page active" id="historia">
+
+  <div class="grid four">
+    <div class="card kpi">
+      <small>Votos emitidos · 2026</small>
+      <strong>239.490</strong>
+      <em>Gobernador regional</em>
+    </div>
+    <div class="card kpi">
+      <small>Amílcar Díaz</small>
+      <strong>52.822</strong>
+      <em>25,905% de votos válidos</em>
+    </div>
+    <div class="card kpi">
+      <small>Segundo Hernández</small>
+      <strong>48.024</strong>
+      <em>23,552% de votos válidos</em>
+    </div>
+    <div class="card kpi">
+      <small>Otras candidaturas</small>
+      <strong>103.061</strong>
+      <em>50,543% de votos válidos</em>
+    </div>
+  </div>
+
+  <div class="grid two mt">
+
+    <div class="card">
+      <h2>Resultados de octubre de 2026</h2>
+      <p class="muted">
+        Los porcentajes se calculan sobre 203.907 votos válidos.
+      </p>
+      <div id="c2026"></div>
+    </div>
+
+    <div class="card">
+      <h2>Composición del voto emitido</h2>
+      <div id="composicion"></div>
+      <div class="note mt">
+        Votos fuera de las dos candidaturas finalistas:
+        <strong>138.644</strong> =
+        103.061 de otras listas + 22.776 blancos + 12.807 nulos.
+      </div>
+    </div>
+
+  </div>
+
+  <div class="grid two mt">
+
+    <div class="card">
+      <h2>Participación histórica de 2022</h2>
+      <div id="asistencia"></div>
+      <p class="muted">
+        Entre las dos vueltas hubo 44.691 votantes menos:
+        una caída del 19,81% respecto de los votantes
+        de octubre de 2022.
+      </p>
+    </div>
+
+    <div class="card">
+      <h2>Blancos y nulos de 2022</h2>
+      <div id="invalidos2022"></div>
+      <p class="muted">
+        Como supuesto inicial del modelo se usan 1.815 blancos
+        y 14.199 nulos de la segunda vuelta de 2022.
+        Esto no afirma que se repitan en 2026.
+      </p>
+    </div>
+
+  </div>
+
+</section>
+
+<section class="page" id="reparto">
+
+  <div class="warning">
+    <b>Hipótesis seleccionadas por el usuario:</b>
+    los dos finalistas conservan exactamente sus votos de
+    octubre de 2026; toda la reducción de participación
+    se atribuye al resto del electorado; no existe una
+    transferencia neta inicial entre los finalistas;
+    el remanente se reparte 45/55, 50/50 o 55/45.
+    No son hechos observados ni probabilidades.
+  </div>
+
+  <div class="grid two mt">
+
+    <div class="card">
+      <h2>Parámetros editables</h2>
+
+      <div class="control">
+        <label for="ausentes">
+          Disminución absoluta de votantes respecto
+          de octubre de 2026
+        </label>
+        <input id="ausentes" class="numberinput"
+          type="number" min="0" max="138644" value="44691">
+        <div class="mini">
+          Referencia histórica 2022:
+          225.565 − 180.874 = 44.691 personas.
+          Se aplica aquí al bloque restante como supuesto,
+          no a los votos conservados de los finalistas.
+        </div>
+      </div>
+
+      <div class="grid two">
+
+        <div class="control">
+          <label for="blancos">
+            Blancos que permanecen
+          </label>
+          <input id="blancos" class="numberinput"
+            type="number" min="0" max="138644" value="1815">
+          <div class="mini">Segunda vuelta 2022</div>
+        </div>
+
+        <div class="control">
+          <label for="nulos">
+            Nulos que permanecen
+          </label>
+          <input id="nulos" class="numberinput"
+            type="number" min="0" max="138644" value="14199">
+          <div class="mini">Segunda vuelta 2022</div>
+        </div>
+
+      </div>
+
+      <div class="buttons">
+        <button class="btn" id="restablecer">
+          Restablecer datos históricos
+        </button>
+        <button class="btn" id="exportar">
+          Exportar escenarios CSV
+        </button>
+      </div>
+
+      <div id="errorModelo" class="warning mt" hidden></div>
+    </div>
+
+    <div class="card">
+      <h2>Contabilidad de los votos</h2>
+      <div id="flujo"></div>
+      <div class="note mt" id="auditoria"></div>
+    </div>
+
+  </div>
+
+  <div class="card mt">
+    <h2>Primer simulador · tres repartos del remanente</h2>
+    <p class="muted">
+      El 5% se interpreta como
+      <b>cinco puntos porcentuales</b> a cada lado del reparto
+      igualitario. No es un margen de error estadístico.
+    </p>
+
+    <div class="tablebox">
+      <table>
+        <thead>
+          <tr>
+            <th>Reparto Díaz / Hernández</th>
+            <th class="right">Díaz</th>
+            <th class="right">Hernández</th>
+            <th class="right">Diferencia (D − H)</th>
+          </tr>
+        </thead>
+        <tbody id="tablaBase"></tbody>
+      </table>
+    </div>
+
+    <div id="barrasBase" class="mt"></div>
+  </div>
+
+</section>
+
+<section class="page" id="transferencia">
+
+  <div class="card">
+    <h2>Segundo simulador · cambio directo hipotético</h2>
+    <p class="muted">
+      La referencia territorial es la diferencia registrada
+      en Utcubamba en octubre: Hernández 22.236;
+      Díaz 13.733; diferencia 8.503.
+      No se conoce si alguien cambiará su voto en diciembre.
+    </p>
+
+    <div id="utcubambaBarras"></div>
+
+    <div class="control">
+      <label for="traspaso">
+        Votos hipotéticamente transferidos de Hernández a Díaz
+        <output id="valorTraspaso">8.503</output>
+      </label>
+      <input id="traspaso" type="range"
+        min="0" max="8503" step="1" value="8503">
+      <div class="ends">
+        <span>0</span>
+        <span>8.503</span>
+      </div>
+    </div>
+
+    <div class="warning">
+      Esta es una operación aritmética: sumar una cantidad
+      a un candidato y restarla al otro.
+      No agrega votos nuevos ni identifica votantes
+      que puedan ser persuadidos.
+    </div>
+  </div>
+
+  <div class="card mt">
+    <h2>Tres escenarios con transferencia hipotética</h2>
+
+    <div class="tablebox">
+      <table>
+        <thead>
+          <tr>
+            <th>Reparto del remanente</th>
+            <th class="right">Díaz</th>
+            <th class="right">Hernández</th>
+            <th class="right">Diferencia (D − H)</th>
+          </tr>
+        </thead>
+        <tbody id="tablaTransfer"></tbody>
+      </table>
+    </div>
+
+    <div id="resumenTransfer" class="note mt"></div>
+  </div>
+
+</section>
+
+<section class="page" id="sensibilidad">
+
+  <div class="card">
+    <h2>Tercer análisis · sensibilidad y conservación de votos</h2>
+
+    <p class="muted">
+      Para tres valores de abstención, tres valores de
+      blancos/nulos, tres repartos y tres valores
+      de transferencia se calculan 81 combinaciones.
+      Este análisis determina límites matemáticos
+      <b>condicionados a los rangos elegidos</b>,
+      no la probabilidad de un resultado.
+    </p>
+
+    <div class="grid two">
+
+      <div class="control">
+        <label for="rangoAus">
+          Variación relativa de la caída de participación
+          <output id="outRangoAus">±10%</output>
+        </label>
+        <input id="rangoAus" type="range"
+          min="0" max="30" step="1" value="10">
+        <div class="ends">
+          <span>0%</span>
+          <span>30%</span>
+        </div>
+      </div>
+
+      <div class="control">
+        <label for="rangoInv">
+          Variación relativa de blancos y nulos
+          <output id="outRangoInv">±20%</output>
+        </label>
+        <input id="rangoInv" type="range"
+          min="0" max="40" step="1" value="20">
+        <div class="ends">
+          <span>0%</span>
+          <span>40%</span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="summary mt" id="limites"></div>
+  </div>
+
+  <div class="card mt">
+    <h2>Casos de frontera del conjunto explorado</h2>
+
+    <div class="tablebox">
+      <table>
+        <thead>
+          <tr>
+            <th>Caso aritmético</th>
+            <th class="right">Díaz</th>
+            <th class="right">Hernández</th>
+            <th class="right">Diferencia</th>
+          </tr>
+        </thead>
+        <tbody id="tablaLimites"></tbody>
+      </table>
+    </div>
+
+    <p class="muted" id="estadoLimites"></p>
+  </div>
+
+  <div class="warning mt">
+    <b>¿Por qué no simplex ni regresión para obtener una probabilidad?</b>
+    Simplex optimiza una función con restricciones, pero no estima
+    cómo votará la población. Una regresión de preferencias
+    necesitaría observaciones comparables, variables explicativas
+    y validación externa; tres escenarios inventados no
+    constituyen entrenamiento estadístico.
+    La sensibilidad es adecuada para comprobar cómo cambia
+    la aritmética ante supuestos distintos.
+  </div>
+
+</section>
+
+<section class="page" id="fuentes">
+
+  <div class="card">
+    <h2>Fuentes de los datos y límites</h2>
+
+    <div class="source">
+      <strong>Primera vuelta regional 2026</strong>
+      <p>
+        Reina de la Selva: transcripción del cómputo ONPE
+        con las 1.263 actas, blancos, nulos y votos válidos.
+      </p>
+      <a target="_blank" rel="noopener noreferrer"
+        href="https://reinadelaselva.pe/amazonas-somos-peru-y-unidos-al-campo-van-a-segunda-vuelta-separados-por-4798-votos/">
+        Ver resultados 2026
+      </a>
+    </div>
+
+    <div class="source">
+      <strong>
+        Participación en segunda vuelta regional 2022
+      </strong>
+      <p>
+        ONPE, Informe de Evaluación de la Segunda Elección
+        Regional 2022: Amazonas tuvo 180.874 asistentes
+        y 319.326 electores habilitados.
+      </p>
+      <a target="_blank" rel="noopener noreferrer"
+        href="https://www.onpe.gob.pe/modTransparencia/downloads/2022/Eva-POE-SER2022.pdf">
+        Consultar informe ONPE
+      </a>
+    </div>
+
+    <div class="source">
+      <strong>
+        Resultados históricos por mesa de 2022
+      </strong>
+      <p>
+        ONPE: archivos de datos abiertos de la segunda
+        elección regional de gobernador.
+      </p>
+      <a target="_blank" rel="noopener noreferrer"
+        href="https://www.datosabiertos.gob.pe/dataset/resultados-por-mesa-de-las-elecciones-de-gobernadores-y-vicegobernadores-regionales-2022-3">
+        Consultar datos abiertos
+      </a>
+    </div>
+
+    <div class="source">
+      <strong>
+        Utcubamba, gobernador regional 2026
+      </strong>
+      <p>
+        Esfera Radio cita el cómputo de octubre:
+        22.236 Hernández y 13.733 Díaz.
+        No confundir con las votaciones municipales.
+      </p>
+      <a target="_blank" rel="noopener noreferrer"
+        href="https://esferaradio.net/noticias/noticia">
+        Consultar publicación
+      </a>
+    </div>
+
+    <div class="warning mt">
+      <b>Advertencia:</b>
+      la conservación de todos los votos de ambas candidaturas,
+      la adscripción de toda la caída de asistencia al bloque
+      restante y el reparto sin antivoto son hipótesis
+      del ejercicio. El tablero no ofrece una predicción
+      ni asigna posibilidades de victoria.
+      Todos los cálculos se realizan en tu navegador
+      y no transmiten datos.
+    </div>
+
+  </div>
+
+</section>
+
+</main>
+
+<footer>
+  <div class="container">
+    Observatorio electoral Amazonas 2026 ·
+    Herramienta informativa independiente ·
+    Sin afiliación a ONPE o JNE ·
+    Modelo local en un solo archivo HTML.
+  </div>
+</footer>
+
+<script>
+'use strict';
+
+// =====================================
+// RESULTADOS HISTÓRICOS
+// =====================================
+
+const B = {
+  diaz: 52822,
+  hernandez: 48024,
+  otros: 103061,
+  blancos: 22776,
+  nulos: 12807,
+  emitidos: 239490,
+  validos: 203907,
+  utcD: 13733,
+  utcH: 22236
+};
+
+const HIST = {
+  v1: 225565,
+  v2: 180874,
+  blancos2: 1815,
+  nulos2: 14199
+};
+
+const RESTO = B.otros + B.blancos + B.nulos;
+
+const $ = id => document.getElementById(id);
+
+const fmt = n =>
+  Math.round(n).toLocaleString('es-PE');
+
+const pct = (n,d) =>
+  (100*n/d).toLocaleString('es-PE',{
+    maximumFractionDigits:2,
+    minimumFractionDigits:2
+  }) + '%';
+
+const signed = n =>
+  (n>0?'+':'') + fmt(n);
+
+// =====================================
+// GRÁFICOS DE BARRAS
+// =====================================
+
+function bar(nombre,valor,max,color,leyenda){
+
+  const ancho = max
+    ? Math.max(0,Math.min(100,100*valor/max))
+    : 0;
+
+  return `
+    <div class="bar">
+      <div class="barline">
+        <span>${nombre}</span>
+        <strong>${leyenda??fmt(valor)}</strong>
+      </div>
+      <div class="track">
+        <div class="fill"
+          style="background:${color};width:${ancho}%">
+        </div>
+      </div>
+    </div>`;
+}
+
+// =====================================
+// RESULTADOS REALES
+// =====================================
+
+function drawHistorical(){
+
+  const d = [
+    ['Somos Perú',52822,'#087e77'],
+    ['Unidos al Campo',48024,'#bc7656'],
+    ['Victoria Amazonense',45688,'#4c80a0'],
+    ['Alianza para el Progreso',44429,'#9b8db8'],
+    ['Juntos por el Perú',12055,'#b09e58'],
+    ['Frepap',889,'#92a5ae']
+  ];
+
+  $('c2026').innerHTML = d.map(x =>
+    bar(
+      x[0],
+      x[1],
+      52822,
+      x[2],
+      `${fmt(x[1])} · ${pct(x[1],B.validos)}`
+    )
+  ).join('');
+
+  $('composicion').innerHTML =
+    bar(
+      'Votos válidos',
+      B.validos,
+      B.emitidos,
+      '#087e77',
+      fmt(B.validos)
+    ) +
+    bar(
+      'Blancos',
+      B.blancos,
+      B.emitidos,
+      '#d9aa5d',
+      fmt(B.blancos)
+    ) +
+    bar(
+      'Nulos',
+      B.nulos,
+      B.emitidos,
+      '#bc7656',
+      fmt(B.nulos)
+    );
+
+  $('asistencia').innerHTML =
+    bar(
+      'Primera vuelta 2022',
+      HIST.v1,
+      HIST.v1,
+      '#4c80a0',
+      fmt(HIST.v1)
+    ) +
+    bar(
+      'Segunda vuelta 2022',
+      HIST.v2,
+      HIST.v1,
+      '#087e77',
+      fmt(HIST.v2)
+    );
+
+  $('invalidos2022').innerHTML =
+    bar(
+      'Blancos en segunda vuelta',
+      HIST.blancos2,
+      HIST.nulos2,
+      '#d9aa5d',
+      fmt(HIST.blancos2)
+    ) +
+    bar(
+      'Nulos en segunda vuelta',
+      HIST.nulos2,
+      HIST.nulos2,
+      '#bc7656',
+      fmt(HIST.nulos2)
+    );
+
+  $('utcubambaBarras').innerHTML =
+    bar(
+      'Hernández',
+      B.utcH,
+      B.utcH,
+      '#bc7656',
+      fmt(B.utcH)
+    ) +
+    bar(
+      'Díaz',
+      B.utcD,
+      B.utcH,
+      '#087e77',
+      fmt(B.utcD)
+    );
+}
+
+// =====================================
+// LECTURA Y VALIDACIÓN DE PARÁMETROS
+// =====================================
+
+function read(){
+
+  return {
+    aus: Math.round(Number($('ausentes').value)),
+    blancos: Math.round(Number($('blancos').value)),
+    nulos: Math.round(Number($('nulos').value)),
+    t: Math.round(Number($('traspaso').value))
+  };
+}
+
+function valid(p){
+
+  return [
+    p.aus,
+    p.blancos,
+    p.nulos
+  ].every(n =>
+    Number.isFinite(n) && n >= 0
+  ) &&
+  p.aus+p.blancos+p.nulos <= RESTO &&
+  Number.isFinite(p.t) &&
+  p.t>=0 &&
+  p.t<=8503;
+}
+
+// =====================================
+// FÓRMULA PRINCIPAL
+// =====================================
+
+function calc(p,cuota,t=0){
+
+  const rem =
+    RESTO-p.aus-p.blancos-p.nulos;
+
+  const x =
+    Math.round(rem*cuota/100);
+
+  const a =
+    B.diaz+x+t;
+
+  const h =
+    B.hernandez+(rem-x)-t;
+
+  return {
+    a,
+    h,
+    rem,
+    total:a+h,
+    delta:a-h,
+    turnout:a+h+p.blancos+p.nulos
+  };
+}
+
+// Tres escenarios:
+// 45/55, 50/50 y 55/45.
+
+function rows(p,t){
+
+  return [45,50,55].map(s => ({
+    s,
+    ...calc(p,s,t)
+  }));
+}
+
+// =====================================
+// TABLAS DE RESULTADOS
+// =====================================
+
+function renderTable(data){
+
+  return data.map(x => `
+    <tr class="${x.s===50?'centerrow':''}">
+      <td>${x.s}% / ${100-x.s}%</td>
+      <td class="right">${fmt(x.a)}</td>
+      <td class="right">${fmt(x.h)}</td>
+      <td class="right">${signed(x.delta)}</td>
+    </tr>
+  `).join('');
+}
+
+// =====================================
+// ACTUALIZACIÓN DE SIMULADORES
+// =====================================
+
+function run(){
+
+  const p = read();
+
+  $('valorTraspaso').textContent =
+    fmt(p.t);
+
+  $('outRangoAus').textContent =
+    '±'+$('rangoAus').value+'%';
+
+  $('outRangoInv').textContent =
+    '±'+$('rangoInv').value+'%';
+
+  $('errorModelo').hidden =
+    valid(p);
+
+  $('errorModelo').textContent =
+    'Estos valores exceden las '+
+    fmt(RESTO)+
+    ' papeletas del bloque restante. '+
+    'Reduce ausentes, blancos o nulos.';
+
+  if(!valid(p)){
+
+    [
+      'tablaBase',
+      'tablaTransfer',
+      'limites',
+      'tablaLimites',
+      'flujo',
+      'barrasBase',
+      'resumenTransfer',
+      'auditoria',
+      'estadoLimites'
+    ].forEach(id => {
+      $(id).innerHTML='—';
+    });
+
+    return;
+  }
+
+  const b = rows(p,0);
+  const t = rows(p,p.t);
+  const r = b[1];
+
+  // Contabilidad del bloque restante
+
+  $('flujo').innerHTML =
+    bar(
+      'Otras candidaturas',
+      B.otros,
+      RESTO,
+      '#4c80a0',
+      fmt(B.otros)
+    ) +
+    bar(
+      'Blancos 2026',
+      B.blancos,
+      RESTO,
+      '#d9aa5d',
+      fmt(B.blancos)
+    ) +
+    bar(
+      'Nulos 2026',
+      B.nulos,
+      RESTO,
+      '#bc7656',
+      fmt(B.nulos)
+    ) +
+    `<hr style="
+      border:0;
+      border-top:1px solid #dbe5eb
+    ">
+    <p>
+      Bloque total:
+      <b>${fmt(RESTO)}</b>
+      <br>
+      Menos ausentes:
+      <b>${fmt(p.aus)}</b>
+      <br>
+      Menos blancos:
+      <b>${fmt(p.blancos)}</b>
+      <br>
+      Menos nulos:
+      <b>${fmt(p.nulos)}</b>
+      <br>
+      Remanente distribuible:
+      <b>${fmt(r.rem)}</b>
+    </p>`;
+
+  // Control de que no se dupliquen votos
+
+  $('auditoria').innerHTML =
+    `Control de conservación:
+    votos válidos simulados
+    ${fmt(r.total)}
+    + blancos y nulos
+    ${fmt(p.blancos+p.nulos)}
+    + ausentes adicionales
+    ${fmt(p.aus)}
+    = <b>${fmt(B.emitidos)}</b>,
+    igual al total emitido en octubre de 2026.
+    La identidad es contable, no una predicción.`;
+
+  // Escenarios sin transferencia
+
+  $('tablaBase').innerHTML =
+    renderTable(b);
+
+  // Escenarios con transferencia
+
+  $('tablaTransfer').innerHTML =
+    renderTable(t);
+
+  // Barras de escenario central
+
+  $('barrasBase').innerHTML =
+    bar(
+      'Díaz · reparto 50/50',
+      r.a,
+      r.total,
+      '#087e77',
+      fmt(r.a)
+    ) +
+    bar(
+      'Hernández · reparto 50/50',
+      r.h,
+      r.total,
+      '#bc7656',
+      fmt(r.h)
+    );
+
+  $('resumenTransfer').textContent =
+    `Con una transferencia directa de
+    ${fmt(p.t)} votos, la diferencia D − H
+    aumenta en ${fmt(2*p.t)} respecto del
+    mismo reparto sin transferencia.
+    No se suman votantes nuevos.`;
+
+  sensitivity(p);
+}
+
+// =====================================
+// ANÁLISIS DE SENSIBILIDAD
+// =====================================
+
+function sensitivity(p){
+
+  const ra =
+    Number($('rangoAus').value)/100;
+
+  const ri =
+    Number($('rangoInv').value)/100;
+
+  // Tres valores posibles para ausentismo
+
+  const abs = [
+    Math.round(p.aus*(1-ra)),
+    p.aus,
+    Math.round(p.aus*(1+ra))
+  ];
+
+  // Tres factores para blancos y nulos
+
+  const inv = [
+    1-ri,
+    1,
+    1+ri
+  ];
+
+  // Tres intensidades de transferencia
+
+  const trans = [
+    0,
+    Math.round(p.t/2),
+    p.t
+  ];
+
+  const cases = [];
+
+  // 3 x 3 x 3 x 3 = 81 combinaciones
+
+  for(const a of abs){
+
+    for(const f of inv){
+
+      for(const s of [45,50,55]){
+
+        for(const t of trans){
+
+          const x = {
+            aus:a,
+            blancos:Math.round(p.blancos*f),
+            nulos:Math.round(p.nulos*f),
+            t
+          };
+
+          if(!valid(x)) continue;
+
+          cases.push({
+            ...calc(x,s,t),
+            s,
+            aus:a,
+            invalidos:x.blancos+x.nulos,
+            t
+          });
+
+        }
+      }
+    }
+  }
+
+  cases.sort((a,b) => a.delta-b.delta);
+
+  if(!cases.length){
+
+    $('limites').textContent =
+      'Sin combinaciones válidas';
+
+    $('tablaLimites').textContent='—';
+
+    return;
+  }
+
+  const low = cases[0];
+
+  const high = cases[cases.length-1];
+
+  const middle =
+    calc(p,50,Math.round(p.t/2));
+
+  // Resumen de rangos matemáticos
+
+  $('limites').innerHTML = `
+    <div>
+      <span>Combinaciones válidas</span>
+      <strong>${cases.length}</strong>
+    </div>
+    <div>
+      <span>Diferencia mínima</span>
+      <strong>${signed(low.delta)}</strong>
+    </div>
+    <div>
+      <span>Diferencia máxima</span>
+      <strong>${signed(high.delta)}</strong>
+    </div>
+  `;
+
+  const result = [
+    ['Límite inferior',low],
+    ['Caso central parametrizado',middle],
+    ['Límite superior',high]
+  ];
+
+  $('tablaLimites').innerHTML =
+    result.map(([name,x]) => `
+      <tr>
+        <td>${name}</td>
+        <td class="right">${fmt(x.a)}</td>
+        <td class="right">${fmt(x.h)}</td>
+        <td class="right">${signed(x.delta)}</td>
+      </tr>
+    `).join('');
+
+  $('estadoLimites').textContent =
+    `Se exploraron variaciones de
+    ±${Math.round(ra*100)}% para la caída de votantes,
+    ±${Math.round(ri*100)}% para blancos/nulos,
+    repartos de 45/50/55 y traspasos de 0,
+    mitad y total del control seleccionado.
+    Estos límites no tienen probabilidades asociadas.`;
+}
+
+// =====================================
+// NAVEGACIÓN
+// =====================================
+
+for(const b of document.querySelectorAll('[data-page]')){
+
+  b.addEventListener('click',()=>{
+
+    document.querySelectorAll('[data-page]')
+      .forEach(x =>
+        x.classList.toggle('active',x===b)
+      );
+
+    document.querySelectorAll('.page')
+      .forEach(x =>
+        x.classList.toggle(
+          'active',
+          x.id===b.dataset.page
+        )
+      );
+
+    window.scrollTo({
+      top:0,
+      behavior:'smooth'
+    });
+
+  });
+}
+
+// =====================================
+// CONTROLES
+// =====================================
+
+[
+  'ausentes',
+  'blancos',
+  'nulos',
+  'traspaso',
+  'rangoAus',
+  'rangoInv'
+].forEach(id =>
+  $(id).addEventListener('input',run)
+);
+
+// Restaurar valores
+
+$('restablecer').addEventListener('click',()=>{
+
+  $('ausentes').value=44691;
+  $('blancos').value=1815;
+  $('nulos').value=14199;
+  $('traspaso').value=8503;
+  $('rangoAus').value=10;
+  $('rangoInv').value=20;
+
+  run();
+});
+
+// =====================================
+// EXPORTAR A CSV
+// =====================================
+
+$('exportar').addEventListener('click',()=>{
+
+  const p=read();
+
+  if(!valid(p))return;
+
+  const data = [[
+    'Escenario',
+    'Cuota_Diaz',
+    'Transferencia',
+    'Diaz',
+    'Hernandez',
+    'Diferencia',
+    'Remanente'
+  ]];
+
+  for(const t of [0,p.t]){
+
+    for(const x of rows(p,t)){
+
+      data.push([
+        t?'Con transferencia':'Base',
+        x.s,
+        t,
+        x.a,
+        x.h,
+        x.delta,
+        x.rem
+      ]);
+
+    }
+  }
+
+  const csv =
+    '\ufeff'+
+    data.map(r =>
+      r.map(v =>
+        '"'+String(v).replace(/"/g,'""')+'"'
+      ).join(';')
+    ).join('\r\n');
+
+  const u = URL.createObjectURL(
+    new Blob([csv],{
+      type:'text/csv;charset=utf-8'
+    })
+  );
+
+  const a = document.createElement('a');
+
+  a.href=u;
+  a.download='escenarios_amazonas_2026.csv';
+  a.click();
+
+  setTimeout(
+    ()=>URL.revokeObjectURL(u),
+    1000
+  );
+
+});
+
+// =====================================
+// INICIALIZAR
+// =====================================
+
+drawHistorical();
+run();
+
+</script>
+
+</body>
+</html>
+
